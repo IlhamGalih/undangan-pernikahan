@@ -129,4 +129,34 @@ app.get("/api/test-db", async (req, res) => {
     });
 });
 
+app.get("/api/test-insert", async (req, res) => {
+    const { data, error } = await supabase
+        .from("locations")
+        .insert([
+            {
+                latitude: 0,
+                longitude: 0,
+                timestamp: new Date().toISOString(),
+                received_at: new Date().toISOString()
+            }
+        ])
+        .select();
+
+    if (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+            details: error.details,
+            hint: error.hint,
+            code: error.code
+        });
+    }
+
+    res.json({
+        success: true,
+        message: "INSERT berhasil.",
+        data: data
+    });
+});
+
 module.exports = app;
