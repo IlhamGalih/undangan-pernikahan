@@ -1,12 +1,17 @@
 const express = require("express");
 const cors = require("cors");
+const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const ADMIN_PASSWORD = "ilhamgalih7802";
+// Koneksi Supabase
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
+);
 
 // Tes API
 app.get("/api", (req, res) => {
@@ -16,8 +21,8 @@ app.get("/api", (req, res) => {
     });
 });
 
-// Menerima lokasi
-app.post("/api/location", (req, res) => {
+// Menerima dan menyimpan lokasi
+app.post("/api/location", async (req, res) => {
     const {
         latitude,
         longitude,
@@ -34,30 +39,61 @@ app.post("/api/location", (req, res) => {
         });
     }
 
-    console.log("Lokasi diterima:", {
-        latitude,
-        longitude,
-        timestamp
-    });
+    const { data, error } = await supabase
+        .from("locations")
+        .insert([
+            {
+                latitude: latitude,
+                longitude: longitude,
+                timestamp: timestamp || new Date().toISOString(),
+                received_at: new Date().toISOString()
+            }
+        ])
+        .select();
+
+    if (error) {
+        console.error("Supabase error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Gagal menyimpan lokasi."
+        });
+    }
+
+    console.log("Lokasi tersimpan:", data);
 
     res.json({
         success: true,
-        message: "Lokasi berhasil diterima."
+        message: "Lokasi berhasil disimpan."
     });
 });
 
-// API admin sementara
-app.get("/api/locations", (req, res) => {
+// API admin
+app.get("/api/locations", async (req, res) => {
     const password = req.headers["x-admin-password"];
 
-    if (password !== ADMIN_PASSWORD) {
+    if (password !== "ilhamgalih7802") {
         return res.status(401).json({
             success: false,
             message: "Akses admin ditolak."
         });
     }
 
-    res.json([]);
+    const { data, error } = await supabase
+        .from("locations")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (error) {
+        console.error("Supabase error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Gagal mengambil data lokasi."
+        });
+    }
+
+    res.json(data);
 });
 
 module.exports = app;
