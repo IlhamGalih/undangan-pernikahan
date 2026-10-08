@@ -567,10 +567,11 @@
                  * Ambil data dari backend
                  */
 
-                const response =
-                    await fetch(
-                        "/api/locations"
-                    );
+                const response = await fetch("/api/locations", {
+    headers: {
+        "x-admin-password": "ilhamgalih7802"
+    }
+});
 
 
                 if (!response.ok) {

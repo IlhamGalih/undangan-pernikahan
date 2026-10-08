@@ -16,6 +16,21 @@ const locationFile = path.join(
     "locations.json"
 );
 
+const ADMIN_PASSWORD = "ilhamgalih7802";
+
+function checkAdminPassword(req, res, next) {
+    const password = req.headers["x-admin-password"];
+
+    if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({
+            success: false,
+            message: "Akses admin ditolak."
+        });
+    }
+
+    next();
+}
+
 if (!fs.existsSync(locationFile)) {
     fs.writeFileSync(
         locationFile,
@@ -149,6 +164,7 @@ app.get(
 
 app.get(
     "/api/locations",
+    checkAdminPassword,
     (req, res) => {
 
         try {
