@@ -106,4 +106,27 @@ app.get("/api/locations", async (req, res) => {
     res.json(data);
 });
 
+app.get("/api/test-db", async (req, res) => {
+    const { data, error } = await supabase
+        .from("locations")
+        .select("id")
+        .limit(1);
+
+    if (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+            details: error.details,
+            hint: error.hint,
+            code: error.code
+        });
+    }
+
+    res.json({
+        success: true,
+        message: "Koneksi database berhasil.",
+        data: data
+    });
+});
+
 module.exports = app;
