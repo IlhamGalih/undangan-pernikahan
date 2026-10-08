@@ -52,14 +52,17 @@ app.post("/api/location", async (req, res) => {
         .select();
 
     if (error) {
-        console.error("Supabase error:", error);
+    console.error("Supabase error:", error);
 
-        return res.status(500).json({
-            success: false,
-            message: "Gagal menyimpan lokasi."
-        });
-    }
-
+    return res.status(500).json({
+        success: false,
+        message: "Gagal menyimpan lokasi.",
+        error: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+    });
+}
     console.log("Lokasi tersimpan:", data);
 
     res.json({
