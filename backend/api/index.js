@@ -13,6 +13,13 @@ const supabase = createClient(
     process.env.SUPABASE_KEY
 );
 
+app.get("/api/check-supabase", (req, res) => {
+    res.json({
+        supabaseUrl: !!process.env.SUPABASE_URL,
+        supabaseKey: !!process.env.SUPABASE_KEY
+    });
+});
+
 // Tes API
 app.get("/api", (req, res) => {
     res.json({
