@@ -198,25 +198,13 @@ app.get(
     }
 );
 
-app.listen(
-    PORT,
-    () => {
-
-        console.log(
-            "================================="
-        );
-
-        console.log(
-            "Backend berjalan."
-        );
-
-        console.log(
-            "http://localhost:" + PORT
-        );
-
-        console.log(
-            "================================="
-        );
-
-    }
-);
+if (process.env.VERCEL) {
+    module.exports = app;
+} else {
+    app.listen(PORT, () => {
+        console.log("=================================");
+        console.log("Backend berjalan.");
+        console.log("http://localhost:" + PORT);
+        console.log("=================================");
+    });
+}
